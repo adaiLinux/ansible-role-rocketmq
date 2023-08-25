@@ -16,7 +16,7 @@ Including an example of how to use your role (for instance, with variables passe
 Install this ansible role:
 
 ```shell script
-ansible-galaxy install rocketmq
+ansible-galaxy install ansible-role-rocketmq
 ```
 
 Playbook eg:
