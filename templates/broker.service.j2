@@ -1,0 +1,13 @@
+[Unit]
+Description=RocketMQ {{rmq_role}}
+After=network.target
+
+[Service]
+Type=simple
+Environment="ROCKETMQ_HOME={{ install_dir }}/{{ rmq_role_name }}"
+ExecStart={{ rmq_bin_dir }}/mq{{ rmq_role }} -n {{ nameserver_addrs }} -c {{ rmq_conf_dir }}/{{ rmq_role }}.conf -pc {{ rmq_conf_dir }}/rmq-proxy.json --enable-proxy
+ExecStop={{ rmq_bin_dir }}/mqshutdown {{ rmq_role }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

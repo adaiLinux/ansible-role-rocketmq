@@ -1,0 +1,59 @@
+---
+# defaults file for rocketmq
+action: "add"
+# 指定角色: namesrv | broker
+rmq_role: ""
+java_home: "/usr/local/jdk1.8"
+pkg_name: "rocketmq-{{ ver }}-bin-release.tgz"
+file_name: "rocketmq-{{ ver }}-bin-release"
+pkg_dir: "/home/op/workspace/soft/rocketmq"
+
+# name server
+# n0-ip:9878;n1-ip:9878;n3-ip:9878
+rmp_peer_hosts: ""
+# 初始化堆内存大小
+namesrv_xms: 4g
+# 最大堆内存大小
+namesrv_xmx: "{{ namesrv_xms }}"
+# 最小堆内存大小：取 broker_xmx * 0.5
+namesrv_xmn: 2g
+rmq_controller_group_name: "zzfund-namesrv"
+
+# broker
+# 初始化堆内存大小
+broker_xms: 2g
+# 最大堆内存大小
+broker_xmx: "{{ broker_xms }}"
+# 最小堆内存大小：取 broker_xmx * 0.5
+broker_xmn: 1g
+broker_cluster_name: "zzfund-broker"
+broker_name: ""
+broker_listen_port: 30911
+# nameserver1:9878;nameserver2:9878;nameserver3:9878
+controller_addrs: ""
+nameserver_addrs: ""
+rmq_namesrv_servers: []
+rmq_namesrv_jvm_port: 12345
+rmq_broker_jvm_port: 12345
+is_auto_create_topic_enable: false
+is_auto_create_subscription_group: false
+
+# proxy
+proxy_listen_port: 28080
+proxy_grpc_port: 28081
+
+# system env
+tmp_dir: "/usr/local/src"
+work_dir: "/data/work"
+rmq_role_name: ""
+install_dir: "{{ work_dir }}/rocketmq"
+store_dir: "{{ work_dir }}/rmqstore/{{ rmq_role_name }}"
+commit_log_dir: "{{ store_dir }}/commitlog"
+consumequeue_dir: "{{ store_dir }}/consumequeue"
+rmq_bin_dir: "{{ install_dir }}/{{ rmq_role_name }}/bin"
+rmq_conf_dir: "{{ install_dir }}/{{ rmq_role_name }}/conf"
+rmq_servie_name: "rmq-{{ rmq_role_name }}"
+rmq_servie_file: "/usr/lib/systemd/system/{{ rmq_servie_name }}.service"
+
+# system kernel
+limits_sysctl_ignore: false

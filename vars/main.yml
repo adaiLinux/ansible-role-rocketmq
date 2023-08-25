@@ -1,0 +1,19 @@
+---
+# vars file for rocketmq
+ver: "5.1.3"
+is_master: ""
+
+limits_sysctl:
+- { name: "vm.overcommit_memory", value: "1" }
+- { name: "vm.drop_caches", value: "1" }
+- { name: "vm.zone_reclaim_mode", value: "0" }
+- { name: "vm.max_map_count", value: "655360" }
+- { name: "vm.dirty_background_ratio", value: "50" }
+- { name: "vm.dirty_ratio", value: "50" }
+- { name: "vm.dirty_writeback_centisecs", value: "360000" }
+- { name: "vm.page-cluster", value: "3" }
+- { name: "vm.swappiness", value: "1" }
+# - { name: "vm.extra_free_kbytes", value: "2000000" }
+# - { name: "vm.min_free_kbytes", value: "1000000" }
+
+

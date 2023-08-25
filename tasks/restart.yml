@@ -1,0 +1,6 @@
+---
+- name: "Restart {{ rmq_servie_name }}.service"
+  systemd:
+    name: "{{ rmq_servie_name }}"
+    state: restarted
+    daemon_reload: yes

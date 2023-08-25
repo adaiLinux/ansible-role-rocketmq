@@ -1,0 +1,48 @@
+---
+- name: "Create {{ item }}.sh"
+  template:
+    src: "{{ item }}.sh.j2"
+    dest: "{{ install_dir }}/{{ rmq_role_name }}/bin/{{ item }}.sh"
+    mode: 0755
+  with_items:
+    - "runserver"
+    - "runbroker"
+    - "tools"
+
+- name: Recreate runserver.sh for proxy
+  template:
+    src: runproxy.sh.j2
+    dest: "{{ install_dir }}/{{ rmq_role_name }}/bin/runserver.sh"
+    mode: 0755
+  when: rmq_role == "broker"
+
+- name: "Create {{ item }}"
+  template:
+    src: "{{ item }}.sh.j2"
+    dest: "{{ install_dir }}/{{ rmq_role_name }}/bin/{{ item }}"
+    mode: 0755
+  with_items:
+    - "mqbroker"
+    - "mqshutdown"
+
+- name: "Create {{ rmq_role }}.conf"
+  template:
+    src: "{{ rmq_role }}.conf.j2"
+    dest: "{{ install_dir }}/{{ rmq_role_name }}/conf/{{ rmq_role }}.conf"
+
+- name: "Create rmq-proxy.conf"
+  template:
+    src: "rmq-proxy.json.j2"
+    dest: "{{ install_dir }}/{{ rmq_role_name }}/conf/rmq-proxy.json"
+  when: rmq_role == "broker"
+
+- name: "Create {{ rmq_servie_file }}.service"
+  template:
+    src: "{{rmq_role}}.service.j2"
+    dest: "{{ rmq_servie_file }}"
+
+#- name: Include a play
+#  include: sysctl.yml
+
+- name: Include a play
+  include: restart.yml

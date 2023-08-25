@@ -1,0 +1,7 @@
+---
+- name: "Start {{ rmq_servie_name }}.service"
+  systemd:
+    name: "{{ rmq_servie_name }}"
+    state: started
+    enabled: yes
+    daemon_reload: yes

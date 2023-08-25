@@ -1,0 +1,4 @@
+---
+# tasks file for rocketmq
+- name: Include a play
+  include: "{{ action }}.yml"

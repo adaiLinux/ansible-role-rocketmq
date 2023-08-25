@@ -1,0 +1,49 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+brokerClusterName = {{ broker_cluster_name }}
+brokerName = {{ broker_name }}
+brokerId = -1
+brokerRole = SLAVE
+deleteWhen = 04
+fileReservedTime = 48
+flushDiskType=ASYNC_FLUSH
+enableControllerMode = true
+controllerAddr = {{ controller_addrs }}
+namesrvAddr = {{ nameserver_addrs }}
+allAckInSyncStateSet=true
+listenPort={{ broker_listen_port }}
+storePathRootDir={{ store_dir }}
+storePathCommitLog={{ commit_log_dir }}
+storePathConsumerQueue = {{ consumequeue_dir }}
+# 自动创建topic，默认关闭
+autoCreateTopicEnable = {{ is_auto_create_topic_enable }}
+# 是否自动创建订阅组,默认false
+autoCreateSubscriptionGroup = {{ is_auto_create_subscription_group }}
+# 消息在磁盘上的最大传输大小，默认4M
+# maxTransferBytesOnMessageInDisk = 4194304
+# 当 aclEnable 设置为 true 时，表示启用了访问控制列表功能。此时，您可以配置和管理 ACL 规则以控制访问权限。当 aclEnable 设置为 false 时，表示禁用访问控制列表功能，所有客户端都可以自由地发送和消费消息，以及访问其他管理功能。
+aclEnable = false
+# timerMaxDelaySec的默认值是 604800，即延迟时间最大可达 7 天，消息在指定的时间后才被投递给消费者。
+# timerMaxDelaySec = 604800
+# 控制是否启用消息轨迹（Message Trace）功能
+traceTopicEnable = true
+# 用于设置定时器任务的精度，即定时器的触发精度（单位：毫秒），默认情况下，timerPrecisionMs 的值是 50 毫秒，也就是定时器每隔 50 毫秒触发一次。
+timerPrecisionMs = 1000
+# 启用或禁用基于 Disruptor 的定时器（timer）功能
+timerEnableDisruptor = true
+# 用于控制是否允许选举出不完全同步的主节点（unclean leader），默认false
+enableElectUncleanMaster = true
+

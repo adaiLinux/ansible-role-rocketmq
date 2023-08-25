@@ -1,0 +1,17 @@
+---
+- name: Include a play
+  include: stop.yml
+
+- name: "Remove dirs"
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ store_dir }}"
+    - "{{ install_dir }}"
+    - "{{ rmq_servie_file }}"
+
+- name: Remove pkg
+  file:
+    path: "{{ tmp_dir }}/{{ pkg_name }}"
+    state: absent

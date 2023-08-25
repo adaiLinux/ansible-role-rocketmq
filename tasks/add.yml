@@ -1,0 +1,33 @@
+---
+- name: Ensure dirs exist
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ install_dir }}"
+    - "{{ store_dir }}"
+    - "{{ commit_log_dir }}"
+    - "{{ consumequeue_dir }}"
+
+- name: Copy pkg
+  copy:
+    src: "{{ pkg_dir }}/{{ pkg_name }}"
+    dest: "{{ tmp_dir }}/{{ pkg_name }}"
+
+- name: Decompress pkg
+  unarchive:
+    src: "{{ tmp_dir }}/{{ pkg_name }}"
+    dest: "{{ work_dir }}"
+    remote_src: yes
+
+- name: "Rename to {{ install_dir }}"
+  shell:
+    cmd: "mv {{ work_dir }}/{{ file_name }} {{ install_dir }}/{{ rmq_role_name }}"
+
+- name: Include a play
+  include: config.yml
+
+- name: Include a play
+  include: start.yml
+
+
